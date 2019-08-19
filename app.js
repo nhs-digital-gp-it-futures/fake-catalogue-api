@@ -1,6 +1,7 @@
 import bodyParser from 'body-parser';
 import express from 'express';
-import db from './db/db';
+import solutions from './db/solutions';
+import capabilities from './db/capabilities'
 import { findSolution } from './db/findSolution';
 
 const app = express();
@@ -13,7 +14,7 @@ app.get('/api/v1/solutions', (req, res) => {
   res.status(200).send({
     success: true,
     message: 'solutions retrieved succesfully',
-    solutions: db
+    solutions: solutions
   })
 });
 
@@ -23,6 +24,14 @@ app.get('/api/v1/solution/:solutionId', (req, res) => {
     success: true,
     message: 'solution retrieved succesfully',
     solution: findSolution(solutionId)
+  })
+});
+
+app.get('/api/v1/capabilities', (req, res) => {
+  res.status(200).send({
+    success: true,
+    message: 'capabilities retrieved succesfully',
+    capabilities: capabilities
   })
 });
 

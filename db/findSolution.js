@@ -1,4 +1,4 @@
-import db from './db';
+import db from './solutions';
 
 export const findSolution = (solutionId) => {
   const solution = db.find(sol => {
