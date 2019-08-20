@@ -3,6 +3,7 @@ import express from 'express';
 import solutions from './db/solutions';
 import capabilities from './db/capabilities'
 import { findSolution } from './db/findSolution';
+import { filterSolutionsByCapabilities } from './db/filterSolutionsByCapabilities';
 
 const app = express();
 
@@ -15,6 +16,18 @@ app.get('/api/v1/solutions', (req, res) => {
     success: true,
     message: 'solutions retrieved succesfully',
     solutions: solutions
+  })
+});
+
+app.post('/api/v1/solutions', (req, res) => {
+  const selectedCapabilites = req.body;
+
+  const filteredSolutions = filterSolutionsByCapabilities(selectedCapabilites.capabilities);
+
+  res.status(200).send({
+    success: true,
+    message: 'solutions retrieved succesfully',
+    solutions: filteredSolutions
   })
 });
 
